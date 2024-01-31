@@ -1,0 +1,19 @@
+{
+  "name": "website",
+  "version": "0.0.1",
+  "description": "SourceJump website v2",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/worldspawn-web/website.git"
+  },
+  "author": "SourceJump community",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/worldspawn-web/website/issues"
+  },
+  "homepage": "https://github.com/worldspawn-web/website#readme"
+}
