@@ -1,0 +1,35 @@
+{
+  "editor.tabSize": 2,
+
+  "files.eol": "\n",
+
+  "css.customData": [".vscode/tailwind.json"],
+
+  "emmet.includeLanguages": {
+    "postcss": "css"
+  },
+  "emmet.syntaxProfiles": {
+    "postcss": "css"
+  },
+
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  "stylelint.validate": ["css"],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+
+  "cSpell.words": [
+    "bunnyhopping",
+    "clsx",
+    "esnext",
+    "linebreak",
+    "nosniff",
+    "parens",
+    "stylelint",
+    "SVGR",
+    "tailwindcss",
+    "trivago",
+    "volta"
+  ],
+
+  "cSpell.language": "en"
+}
