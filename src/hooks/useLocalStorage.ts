@@ -5,7 +5,10 @@ import { useUpdated } from '@/hooks/useUpdated';
 
 type SetValue<T> = (value: T | ((current: T) => T)) => void;
 
-export const useLocalStorage = <T>(key: string, initialValue: T): [T, SetValue<T>] => {
+export const useLocalStorage = <T>(
+  key: string,
+  initialValue: T
+): [T, SetValue<T>] => {
   const [value, setValue] = useState<T>(initialValue);
 
   useEffect(() => {

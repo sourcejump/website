@@ -15,7 +15,12 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
 
   "stylelint.validate": ["css"],
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
 
   "cSpell.words": [
     "bunnyhopping",

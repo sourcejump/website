@@ -1,8 +1,11 @@
 {
   "trailingComma": "es5",
   "endOfLine": "lf",
-  "printWidth": 100,
-  "plugins": ["prettier-plugin-tailwindcss", "@trivago/prettier-plugin-sort-imports"],
+  "printWidth": 80,
+  "plugins": [
+    "prettier-plugin-tailwindcss",
+    "@trivago/prettier-plugin-sort-imports"
+  ],
   "tabWidth": 2,
   "semi": true,
   "singleQuote": true,

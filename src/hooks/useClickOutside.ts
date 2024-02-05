@@ -4,8 +4,9 @@ import { useEffect, type RefObject } from 'react';
 
 type Ref = RefObject<HTMLElement> | RefObject<HTMLElement>[];
 
-const eventTargetIsNode = (eventTarget: EventTarget | null): eventTarget is Node =>
-  !!eventTarget && 'baseURI' in eventTarget;
+const eventTargetIsNode = (
+  eventTarget: EventTarget | null
+): eventTarget is Node => !!eventTarget && 'baseURI' in eventTarget;
 
 export const useClickOutside = (ref: Ref, callback: () => void): void => {
   useEffect(() => {
@@ -14,7 +15,9 @@ export const useClickOutside = (ref: Ref, callback: () => void): void => {
 
       const targetAsNode = eventTargetIsNode(target) ? target : null;
 
-      const isOutside = refs.every((ref) => ref.current && !ref.current.contains(targetAsNode));
+      const isOutside = refs.every(
+        (ref) => ref.current && !ref.current.contains(targetAsNode)
+      );
 
       if (isOutside) {
         callback();

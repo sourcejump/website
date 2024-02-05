@@ -38,7 +38,9 @@ export const useQueryParams = <T = {}>(): [
             queryParams.delete(key, value);
           }
         } else {
-          options?.replace ? queryParams.set(key, value) : queryParams.append(key, value);
+          options?.replace
+            ? queryParams.set(key, value)
+            : queryParams.append(key, value);
         }
       });
 

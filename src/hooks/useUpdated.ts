@@ -1,8 +1,16 @@
 'use client';
 
-import { useEffect, useRef, type DependencyList, type EffectCallback } from 'react';
+import {
+  useEffect,
+  useRef,
+  type DependencyList,
+  type EffectCallback,
+} from 'react';
 
-export const useUpdated = (callback: EffectCallback, dependencies: DependencyList): void => {
+export const useUpdated = (
+  callback: EffectCallback,
+  dependencies: DependencyList
+): void => {
   const isMounted = useRef(false);
 
   useEffect(() => {

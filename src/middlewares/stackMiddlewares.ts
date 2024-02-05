@@ -1,7 +1,10 @@
 import { NextResponse, type NextMiddleware } from 'next/server';
 import type { MiddlewareFactory } from '@/middlewares/types';
 
-export function stackMiddlewares(functions: MiddlewareFactory[] = [], index = 0): NextMiddleware {
+export function stackMiddlewares(
+  functions: MiddlewareFactory[] = [],
+  index = 0
+): NextMiddleware {
   const current = functions[index];
 
   if (current) {
