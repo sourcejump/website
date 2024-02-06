@@ -22,12 +22,16 @@ Follow these steps to get the project up and running:
 
    ```bash
    npm install
+   # or
+   yarn install
    ```
 
 3. Run the development server:
 
    ```bash
    npm run dev
+   # or
+   yarn dev
    ```
 
 Visit [http://localhost:3000](http://localhost:3000) in your browser to view the project.
@@ -52,11 +56,9 @@ Visit [http://localhost:3000](http://localhost:3000) in your browser to view the
 ### Linting
 
 - **`npm run lint:eslint`**
-
   - Runs ESLint to check for and potentially fix linting issues in JavaScript and TypeScript files.
 
 - **`npm run lint:stylelint`**
-
   - Runs Stylelint to check for and potentially fix linting issues in CSS files.
 
 - **`npm run lint`**
@@ -70,7 +72,6 @@ Visit [http://localhost:3000](http://localhost:3000) in your browser to view the
 ### Type Checking
 
 - **`npm run type-check`**
-
   - Runs TypeScript compiler in type-checking mode without emitting any files.
 
 - **`npm run type-check:watch`**
