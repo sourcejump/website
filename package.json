@@ -1,0 +1,45 @@
+{
+  "name": "website",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint:eslint": "eslint . --ignore-path .gitignore",
+    "lint:prettier": "prettier . --check",
+    "lint:stylelint": "stylelint \"**/*.css\" --ignore-path .gitignore",
+    "format": "prettier . --write",
+    "typecheck": "tsc --noEmit",
+    "typecheck:watch": "tsc --noEmit --watch",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "next": "14.1.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "sharp": "^0.33.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "autoprefixer": "^10.4.17",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "14.1.0",
+    "eslint-config-prettier": "^9.1.0",
+    "husky": "^9.0.10",
+    "lint-staged": "^15.2.2",
+    "postcss": "^8.4.35",
+    "postcss-import": "^16.0.0",
+    "prettier": "^3.2.5",
+    "prettier-plugin-tailwindcss": "^0.5.11",
+    "stylelint": "^16.2.1",
+    "stylelint-config-standard": "^36.0.0",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.3.3"
+  }
+}
