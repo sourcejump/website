@@ -9,7 +9,7 @@ import {
 
 export const useUpdated = (
   callback: EffectCallback,
-  dependencies: DependencyList
+  dependencies: DependencyList,
 ): void => {
   const isMounted = useRef(false);
 

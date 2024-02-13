@@ -18,7 +18,7 @@ export const useQueryParams = <T = object>(): [
 
   const queryParams = useMemo(
     () => new URLSearchParams(Array.from(searchParams.entries())),
-    [searchParams]
+    [searchParams],
   );
 
   const setQueryParams = useCallback(
@@ -50,7 +50,7 @@ export const useQueryParams = <T = object>(): [
       });
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [pathname, queryParams]
+    [pathname, queryParams],
   );
 
   return [queryParams, setQueryParams];

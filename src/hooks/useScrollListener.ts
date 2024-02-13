@@ -19,7 +19,7 @@ const getReference = <T>(reference: Reference<T>) => {
 
 export const useScrollListener = <T extends Element>(
   callback: (scrollPosition: ScrollListenerParams) => void,
-  reference: Reference<T> = 'window'
+  reference: Reference<T> = 'window',
 ) => {
   const handleScroll = useCallback(() => {
     const { isReactRef, element } = getReference(reference);

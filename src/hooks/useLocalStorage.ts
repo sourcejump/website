@@ -7,7 +7,7 @@ type SetValue<T> = (value: T | ((current: T) => T)) => void;
 
 export const useLocalStorage = <T>(
   key: string,
-  initialValue: T
+  initialValue: T,
 ): [T, SetValue<T>] => {
   const [value, setValue] = useState<T>(initialValue);
 

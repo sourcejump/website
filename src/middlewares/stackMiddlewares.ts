@@ -3,7 +3,7 @@ import { NextResponse, type NextMiddleware } from 'next/server';
 
 export function stackMiddlewares(
   functions: MiddlewareFactory[] = [],
-  index = 0
+  index = 0,
 ): NextMiddleware {
   const current = functions[index];
 
