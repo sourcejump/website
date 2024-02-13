@@ -3,25 +3,40 @@
   "version": "0.1.0",
   "private": true,
   "license": "MIT",
+  "homepage": "https://github.com/sourcejump/website#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sourcejump/website.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sourcejump/website/issues"
+  },
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint:eslint": "eslint . --ignore-path .gitignore",
-    "lint:prettier": "prettier . --check",
     "lint:stylelint": "stylelint \"**/*.css\" --ignore-path .gitignore",
+    "lint:prettier": "prettier . --check",
+    "lint": "npm run lint:eslint && npm run lint:stylelint && npm run lint:prettier",
     "format": "prettier . --write",
     "typecheck": "tsc --noEmit",
     "typecheck:watch": "tsc --noEmit --watch",
     "prepare": "husky"
   },
   "dependencies": {
+    "clsx": "^2.1.0",
     "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18",
-    "sharp": "^0.33.2"
+    "sharp": "^0.33.2",
+    "tailwind-merge": "^2.2.1"
   },
   "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -41,5 +56,8 @@
     "stylelint-config-standard": "^36.0.0",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3"
+  },
+  "volta": {
+    "node": "20.11.0"
   }
 }
