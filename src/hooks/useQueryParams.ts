@@ -1,7 +1,7 @@
 'use client';
 
-import { useCallback, useMemo } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useCallback, useMemo } from 'react';
 
 interface UseQueryParamsOptions {
   replace?: boolean;

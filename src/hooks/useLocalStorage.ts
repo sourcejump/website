@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useUpdated } from '@/hooks/useUpdated';
+import { useEffect, useState } from 'react';
 
 type SetValue<T> = (value: T | ((current: T) => T)) => void;
 

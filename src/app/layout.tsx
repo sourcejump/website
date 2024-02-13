@@ -1,8 +1,8 @@
-import type { FC, ReactNode } from 'react';
+import '@/styles/globals.css';
+import cn from '@/utils/cn';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import cn from '@/utils/cn';
-import '@/styles/globals.css';
+import type { FC, ReactNode } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,7 +18,7 @@ type Props = Readonly<{
 const RootLayout: FC<Props> = async ({ children }) => (
   <html lang="en" className="overflow-x-hidden">
     <body
-      className={cn('flex flex-col min-h-screen w-screen', inter.className)}
+      className={cn('flex min-h-screen w-screen flex-col', inter.className)}
     >
       <main
         id="mainContent"

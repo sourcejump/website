@@ -1,7 +1,7 @@
 'use client';
 
-import { useCallback, type RefObject } from 'react';
 import { useMounted } from '@/hooks/useMounted';
+import { useCallback, type RefObject } from 'react';
 
 interface ScrollListenerParams {
   scrollY: number;

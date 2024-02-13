@@ -1,5 +1,5 @@
-import type { NextFetchEvent, NextRequest } from 'next/server';
 import type { MiddlewareFactory } from '@/middlewares/types';
+import type { NextFetchEvent, NextRequest } from 'next/server';
 
 export const withRedirect: MiddlewareFactory = (next) => {
   return async (request: NextRequest, _next: NextFetchEvent) => {

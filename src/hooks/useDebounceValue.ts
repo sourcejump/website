@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
 import { useUpdated } from '@/hooks/useUpdated';
+import { useState } from 'react';
 
 export const useDebounce = <T>(value: T, delay = 750): T => {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
