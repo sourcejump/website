@@ -1,36 +1,119 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# SourceJump Website
+
+## Prerequisites
+
+Before you begin, ensure you have installed Node.js on your machine:
+
+- [Node.js](https://nodejs.org/) (version 20.x)
+- [npm](https://www.npmjs.com/) (version 10.x)
 
 ## Getting Started
 
-First, run the development server:
+Follow these steps to get the project up and running:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Clone the repository:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+   ```bash
+   git clone https://github.com/sourcejump/website.git
+   cd website
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. Install dependencies:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+   ```bash
+   npm install
+   ```
 
-## Learn More
+3. Run the development server:
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   npm run dev
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Visit [http://localhost:3000](http://localhost:3000) in your browser to view the project.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Scripts
 
-## Deploy on Vercel
+### Development
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **`npm run dev`**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+  - Starts the development server for the Next.js project.
+
+### Build
+
+- **`npm run build`**
+
+  - Builds the production-ready version of the Next.js project.
+
+### Start
+
+- **`npm run start`**
+
+  - Starts the production server for the Next.js project.
+
+### Linting
+
+- **`npm run lint:eslint`**
+
+  - Runs ESLint to check for and potentially fix linting issues in JavaScript and TypeScript files.
+
+- **`npm run lint:stylelint`**
+
+  - Runs Stylelint to check for and potentially fix linting issues in CSS files.
+
+- **`npm run lint:prettier`**
+
+  - Runs Prettier to check for potentially formatting issues.
+
+- **`npm run lint`**
+
+  - Combines linting commands for ESLint, Stylelint and Prettier, running them sequentially.
+
+### Code Formatting
+
+- **`npm run format`**
+
+  - Uses Prettier to automatically format code files in the project.
+
+### Type Checking
+
+- **`npm run type-check`**
+
+  - Runs TypeScript compiler in type-checking mode without emitting any files.
+
+- **`npm run type-check:watch`**
+
+  - Runs TypeScript compiler in type-checking mode with watch mode enabled.
+
+### Git Hooks
+
+- **`npm run prepare`**
+
+  - Executes the Husky CLI's "prepare" script. Husky is a tool for handling Git hooks.
+
+## Contributing
+
+We welcome contributions from the community to help improve and grow our project. Whether you're a developer, designer, tester, or simply an enthusiast, we appreciate your efforts.
+
+### Ways to Contribute
+
+There are several ways you can contribute to SourceJump:
+
+1. **Code Contributions:** Help us improve the codebase by fixing bugs, adding new features, or enhancing existing ones.
+
+2. **Documentation:** Contribute to our documentation to make it more comprehensive and user-friendly.
+
+3. **Bug Reporting:** Report bugs, issues, or suggest improvements through our issue tracker.
+
+4. **Feature Requests:** Share your ideas for new features or improvements.
+
+5. **Community Involvement:** Join discussions on our [Discord server](https://discord.com/invite/nP5YzB3), help answer questions, and engage with other contributors.
+
+## Bug Reports
+
+If you've found a problem with the website, please [open an issue](https://github.com/sourcejump/website/issues)!
+
+## License
+
+This project is licensed under the MIT License.
