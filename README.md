@@ -108,7 +108,7 @@ There are several ways you can contribute to SourceJump:
 
 4. **Feature Requests:** Share your ideas for new features or improvements.
 
-5. **Community Involvement:** Join discussions on our [Discord server](https://discord.com/invite/nP5YzB3), help answer questions, and engage with other contributors.
+5. **Community Involvement:** Join discussions on our [Discord server](https://discord.gg/sourcejump), help answer questions, and engage with other contributors.
 
 ## Bug Reports
 
