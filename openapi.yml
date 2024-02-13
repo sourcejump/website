@@ -1,0 +1,381 @@
+openapi: '3.0.2'
+info:
+  title: SourceJump API
+  version: 1.0.0
+servers:
+  - url: https://sourcejump.net/api/v1
+paths:
+  /maps:
+    get:
+      summary: Return a list of all maps
+      tags: 
+        - maps
+      responses:
+        '200':
+          description: An array of Map objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MapArray'
+        default:
+          description: Unexpected error
+  /maps/{map}:
+    get:
+      summary: Return detailed information about a specified map
+      tags: 
+        - maps
+      parameters:
+        - in: path
+          name: map
+          schema:
+            type: string
+          required: true
+          description: Name of the map
+      responses:
+        '200':
+          description: A Map opject
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Map'
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected error
+  # /maps/{map}/zones:
+  # to be fleshed out upon zone discussion
+  /maps/{map}/runs:
+    get:
+      summary: Return a list of runs hit on a specified map
+      tags: 
+        - maps
+      parameters:
+        - in: path
+          name: map
+          schema:
+            type: string
+          required: true
+          description: Name of the map
+      responses:
+        '200':
+          description: An array of Run objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunArray'
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected error
+  /players/{player}:
+    get:
+      summary: Return detailed information about a player
+      tags:
+        - players
+      parameters:
+        - in: path
+          name: player
+          schema:
+            type: integer
+          required: true
+          description: SteamID64 of the player to fetch
+      responses:
+        '200':
+          description: A Player object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected error
+  /players/{player}/runs:
+    get:
+      summary: Return a list of all runs hit by a player
+      tags:
+        - players
+      parameters:
+        - in: path
+          name: player
+          schema:
+            type: integer
+          required: true
+          description: SteamID64 of the player to fetch
+      responses:
+        '200':
+          description: An array of Run objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunArray'
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected error
+  /runs:
+    get:
+      summary: Return a list of all runs
+      tags:
+        - runs
+      responses:
+        '200':
+          description: An array of Run objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunArray'
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected error
+    post:
+      summary: Creates a run entry
+      tags:
+        - runs
+      security: 
+        - apiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Run'
+      responses:
+        '201':
+          description: created
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        default:
+          description: Unexpected error
+  /runs/{runId}: 
+    get:
+      summary: Return detailed information about a specific run
+      tags:
+        - runs
+      parameters:
+        - in: path
+          name: runId
+          schema:
+            type: integer
+          required: true
+          description: Run ID of the run to fetch
+      responses:
+        '200':
+          description: A Run object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Run'
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected error
+  /servers:
+    get:
+      summary: Return an array of all connected servers
+      tags:
+        - servers
+      responses:
+        '200':
+          description: An array of Server objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerArray'
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected error
+
+# We can store common response objects and types here
+components:
+  # Security schemes for protected endpoints (run submission)
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+  # Common response objects
+  responses:
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Invalid:
+      description: The request was invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+  schemas:
+    # Generic error response body
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+        - code
+        - string
+    # General response objects
+    Map:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Numerical map ID
+        name:
+          type: string
+          description: Name of the map
+        tier:
+          type: integer
+          description: Difficulty tier of the map
+        created_at:
+          type: string
+          format: date
+          description: When the map was created
+        author:
+          type: string
+          description: Author of the map
+    MapArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Map'
+    Player:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Numerical player ID 
+        name:
+          type: string
+          description: Player name
+        points:
+          type: integer
+          description: Amount of points the player has
+        banned:
+          type: boolean
+          description: Is the player currently banned?
+        country:
+          type: string
+          description: The country specified by the player
+          nullable: true
+        steamid:
+          type: integer
+          description: SteamID64 of the player
+    PlayerArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Player'
+    Run:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Numerical run ID
+        time:
+          type: integer
+          description: Length of the run in ticks
+        date:
+          type: string
+          format: date-time
+          description: When the run was hit
+        sync:
+          type: number
+          format: double
+          description: The runs sync
+        strafes:
+          type: integer
+          description: The amount of strafes in the run
+        jumps:
+          type: integer
+          description: The amount of jumps in the run
+        player_name:
+          type: string
+          description: The name of the player that hit the run
+        map_name:
+          type: string
+          description: The name of the map the run was on
+        style:
+          type: string
+          description: The style the run was played on
+        server:
+          type: string
+          description: The name of the server the run was hit on
+        points:
+          type: integer
+          description: The amount of points awarded for the run
+    RunArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Run'
+    Server:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Numerical server ID
+        name:
+          type: string
+          description: Server name
+        address:
+          type: string
+          format: ipv4
+          description: Server IP address
+        discord_link:
+          type: string
+          description: A link to the server's discord (if it exists)
+          nullable: true
+        owner_steamid:
+          type: integer
+          description: The SteamID64 of the server's owner (if it exists)
+          nullable: true
+        country_name:
+          type: string
+          description: The country the server is hosted in
+    ServerArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Server'
