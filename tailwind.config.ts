@@ -16,5 +16,7 @@ const config: Config = {
     },
   },
   plugins: [],
+  tailwindFunctions: ['clsx', 'twMerge'],
 };
+
 export default config;

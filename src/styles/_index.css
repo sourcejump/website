@@ -1,0 +1,29 @@
+@import url("tailwindcss/base");
+@import url("tailwindcss/components");
+@import url("tailwindcss/utilities");
+
+@layer components {
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+}
+
+@layer utilities {
+  .container {
+    position: relative;
+    margin-inline: auto;
+    max-width: 1300px;
+    width: calc(100vw - 2rem);
+  }
+}
+
+/* Scrollbar */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
