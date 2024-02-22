@@ -8,7 +8,7 @@ paths:
   /maps:
     get:
       summary: Return a list of all maps
-      tags: 
+      tags:
         - maps
       responses:
         '200':
@@ -22,7 +22,7 @@ paths:
   /maps/{map}:
     get:
       summary: Return detailed information about a specified map
-      tags: 
+      tags:
         - maps
       parameters:
         - in: path
@@ -49,7 +49,7 @@ paths:
   /maps/{map}/runs:
     get:
       summary: Return a list of runs hit on a specified map
-      tags: 
+      tags:
         - maps
       parameters:
         - in: path
@@ -143,7 +143,7 @@ paths:
       summary: Creates a run entry
       tags:
         - runs
-      security: 
+      security:
         - ApiKeyAuth: []
       requestBody:
         required: true
@@ -160,7 +160,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         default:
           description: Unexpected error
-  /runs/{runId}: 
+  /runs/{runId}:
     get:
       summary: Return detailed information about a specific run
       tags:
@@ -274,7 +274,7 @@ components:
       properties:
         id:
           type: integer
-          description: Numerical player ID 
+          description: Numerical player ID
         name:
           type: string
           description: Player name
