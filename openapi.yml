@@ -362,3 +362,12 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Server'
+tags:
+  - name: maps
+    description: All routes relating to maps
+  - name: players
+    description: All routes relating to players
+  - name: runs
+    description: All routes relating to runs
+  - name: servers
+    description: All routes relating to servers
