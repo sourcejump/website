@@ -40,8 +40,6 @@ paths:
                 $ref: '#/components/schemas/Map'
         '400':
           $ref: '#/components/responses/Invalid'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
         default:
@@ -69,8 +67,6 @@ paths:
                 $ref: '#/components/schemas/RunArray'
         '400':
           $ref: '#/components/responses/Invalid'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
         default:
@@ -96,8 +92,6 @@ paths:
                 $ref: '#/components/schemas/Player'
         '400':
           $ref: '#/components/responses/Invalid'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
         default:
@@ -123,8 +117,6 @@ paths:
                 $ref: '#/components/schemas/RunArray'
         '400':
           $ref: '#/components/responses/Invalid'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
         default:
@@ -143,8 +135,6 @@ paths:
                 $ref: '#/components/schemas/RunArray'
         '400':
           $ref: '#/components/responses/Invalid'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
         default:
@@ -191,8 +181,6 @@ paths:
                 $ref: '#/components/schemas/Run'
         '400':
           $ref: '#/components/responses/Invalid'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
         default:
@@ -211,13 +199,10 @@ paths:
                 $ref: '#/components/schemas/ServerArray'
         '400':
           $ref: '#/components/responses/Invalid'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
         default:
           description: Unexpected error
-
 # We can store common response objects and types here
 components:
   # Security schemes for protected endpoints (run submission)
@@ -246,7 +231,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-
   schemas:
     # Generic error response body
     Error:
