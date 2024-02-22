@@ -1,4 +1,4 @@
-openapi: '3.0.2'
+openapi: '3.1.0'
 info:
   title: SourceJump API
   version: 1.0.0
@@ -144,7 +144,7 @@ paths:
       tags:
         - runs
       security: 
-        - apiKey: []
+        - ApiKeyAuth: []
       requestBody:
         required: true
         content:
@@ -203,6 +203,7 @@ paths:
           $ref: '#/components/responses/NotFound'
         default:
           description: Unexpected error
+
 # We can store common response objects and types here
 components:
   # Security schemes for protected endpoints (run submission)
@@ -231,6 +232,7 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+
   schemas:
     # Generic error response body
     Error:
@@ -283,9 +285,8 @@ components:
           type: boolean
           description: Is the player currently banned?
         country:
-          type: string
+          type: ['null', string]
           description: The country specified by the player
-          nullable: true
         steamid:
           type: integer
           description: SteamID64 of the player
@@ -349,13 +350,11 @@ components:
           format: ipv4
           description: Server IP address
         discord_link:
-          type: string
+          type: ['null', string]
           description: A link to the server's discord (if it exists)
-          nullable: true
         owner_steamid:
-          type: integer
+          type: ['null', integer]
           description: The SteamID64 of the server's owner (if it exists)
-          nullable: true
         country_name:
           type: string
           description: The country the server is hosted in
