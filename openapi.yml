@@ -10,6 +10,15 @@ paths:
       summary: Return a list of all maps
       tags:
         - maps
+      parameters:
+        - in: query
+          name: sort
+          schema:
+            $ref: '#/components/schemas/MapFields'
+          description: Column to sort on
+        - $ref: '#/components/parameters/orderParam'
+        - $ref: '#/components/parameters/offsetParam'
+        - $ref: '#/components/parameters/limitParam'
       responses:
         '200':
           description: An array of Map objects
@@ -176,6 +185,15 @@ paths:
       summary: Return an array of all connected servers
       tags:
         - servers
+      parameters:
+        - in: query
+          name: sort
+          schema:
+            $ref: '#/components/schemas/ServerFields'
+          description: Column to sort on
+        - $ref: '#/components/parameters/orderParam'
+        - $ref: '#/components/parameters/offsetParam'
+        - $ref: '#/components/parameters/limitParam'
       responses:
         '200':
           description: An array of Server objects
@@ -354,7 +372,24 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Server'
-    # Reusable enum of all run model fields
+    # Reusable enums of model fields
+    MapFields:
+      type: string
+      enum:
+        - id
+        - name
+        - tier
+        - created_at
+        - author
+    PlayerFields:
+      type: string
+      enum:
+        - id
+        - name
+        - points
+        - banned
+        - country
+        - steamid
     RunFields:
       type: string
       enum:
@@ -369,6 +404,15 @@ components:
         - style
         - server
         - points
+    ServerFields:
+      type: string
+      enum:
+        - id
+        - name
+        - address
+        - discord_link
+        - owner_steamid
+        - country_name
   parameters:
     offsetParam:
       in: query
