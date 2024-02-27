@@ -301,7 +301,9 @@ components:
           type: boolean
           description: Is the player currently banned?
         country:
-          type: ['null', string]
+          type:
+            - 'null'
+            - string
           description: The country specified by the player
         steamid:
           type: integer
@@ -366,10 +368,14 @@ components:
           format: ipv4
           description: Server IP address
         discord_link:
-          type: ['null', string]
+          type:
+            - 'null'
+            - string
           description: A link to the server's discord (if it exists)
         owner_steamid:
-          type: ['null', integer]
+          type:
+            - 'null'
+            - integer
           description: The SteamID64 of the server's owner (if it exists)
         country_name:
           type: string
