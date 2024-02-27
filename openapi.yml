@@ -55,6 +55,27 @@ paths:
           description: Unexpected error
   # /maps/{map}/zones:
   # to be fleshed out upon zone discussion
+  /players:
+    get:
+      summary: Return a list of all players
+      tags:
+        - players
+      parameters:
+        - in: query
+          name: sort
+          schema:
+            $ref: '#/components/schemas/PlayerFields'
+          description: Column to sort on
+        - $ref: '#/components/parameters/orderParam'
+        - $ref: '#/components/parameters/offsetParam'
+        - $ref: '#/components/parameters/limitParam'
+      responses:
+        '200':
+          description: An array of Player objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerArray'
   /players/{player}:
     get:
       summary: Return detailed information about a player
