@@ -107,7 +107,7 @@ paths:
         - in: query
           name: sort
           schema:
-            $ref: '#/components/schemas/MapFields'
+            $ref: '#/components/schemas/RunFields'
           description: Column to sort on
         - $ref: '#/components/parameters/orderParam'
         - $ref: '#/components/parameters/offsetParam'
@@ -354,8 +354,8 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Server'
-    # Reusable enum of all map model fields
-    MapFields:
+    # Reusable enum of all run model fields
+    RunFields:
       type: string
       enum:
         - id
