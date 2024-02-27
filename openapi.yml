@@ -107,41 +107,11 @@ paths:
         - in: query
           name: sort
           schema:
-            type: string
-            enum:
-              - id
-              - time
-              - date
-              - sync
-              - strafes
-              - jumps
-              - player_name
-              - map_name
-              - style
-              - server
-              - points
+            $ref: '#/components/schemas/MapFields'
           description: Column to sort on
-        - in: query
-          name: order
-          schema:
-            type: string
-            enum:
-              - asc
-              - desc
-          description: >
-            Sort order (by Run ID):
-             * `asc` - Ascending, from low to high
-             * `desc` - Descending, from high to low
-        - in: query
-          name: offset
-          schema:
-            type: integer
-          description: The number of items to offset the result by
-        - in: query
-          name: limit
-          schema:
-            type: integer
-          description: The number of items to return
+        - $ref: '#/components/parameters/orderParam'
+        - $ref: '#/components/parameters/offsetParam'
+        - $ref: '#/components/parameters/limitParam'
       responses:
         '200':
           description: An array of Run objects
@@ -384,6 +354,46 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Server'
+    # Reusable enum of all map model fields
+    MapFields:
+      type: string
+      enum:
+        - id
+        - time
+        - date
+        - sync
+        - strafes
+        - jumps
+        - player_name
+        - map_name
+        - style
+        - server
+        - points
+  parameters:
+    offsetParam:
+      in: query
+      name: offset
+      schema:
+        type: integer
+      description: The number of items to offset the result by
+    orderParam:
+      in: query
+      name: order
+      schema:
+        type: string
+        enum:
+          - asc
+          - desc
+      description: >
+        Sort order (by Run ID):
+          * `asc` - Ascending, from low to high
+          * `desc` - Descending, from high to low
+    limitParam:
+      in: query
+      name: limit
+      schema:
+        type: integer
+      description: The number of items to return
 tags:
   - name: maps
     description: All routes relating to maps
