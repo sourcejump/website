@@ -46,31 +46,6 @@ paths:
           description: Unexpected error
   # /maps/{map}/zones:
   # to be fleshed out upon zone discussion
-  /maps/{map}/runs:
-    get:
-      summary: Return a list of runs hit on a specified map
-      tags:
-        - maps
-      parameters:
-        - in: path
-          name: map
-          schema:
-            type: string
-          required: true
-          description: Name of the map
-      responses:
-        '200':
-          description: An array of Run objects
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RunArray'
-        '400':
-          $ref: '#/components/responses/Invalid'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        default:
-          description: Unexpected error
   /players/{player}:
     get:
       summary: Return detailed information about a player
@@ -96,36 +71,77 @@ paths:
           $ref: '#/components/responses/NotFound'
         default:
           description: Unexpected error
-  /players/{player}/runs:
+  /runs:
     get:
-      summary: Return a list of all runs hit by a player
+      summary: Return a list of runs matching the given query
       tags:
-        - players
+        - runs
       parameters:
-        - in: path
+        - in: query
+          name: server
+          schema:
+            type: integer
+          description: ID of the server to filter
+        - in: query
           name: player
           schema:
             type: integer
-          required: true
-          description: SteamID64 of the player to fetch
-      responses:
-        '200':
-          description: An array of Run objects
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RunArray'
-        '400':
-          $ref: '#/components/responses/Invalid'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        default:
-          description: Unexpected error
-  /runs:
-    get:
-      summary: Return a list of all runs
-      tags:
-        - runs
+          description: SteamID64 of the player to filter
+        - in: query
+          name: map
+          schema:
+            type: string
+          description: Name of the map to filter
+        - in: query
+          name: track
+          schema:
+            type: integer
+            default: 0
+          description: Track of the run to filter (Default - 0/Main)
+        - in: query
+          name: style
+          schema:
+            type: integer
+            default: 0
+          description: Style of the run to filter (Default - 0/Auto)
+        - in: query
+          name: sort
+          schema:
+            type: string
+            enum:
+              - id
+              - time
+              - date
+              - sync
+              - strafes
+              - jumps
+              - player_name
+              - map_name
+              - style
+              - server
+              - points
+          description: Column to sort on
+        - in: query
+          name: order
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+          description: >
+            Sort order (by Run ID):
+             * `asc` - Ascending, from low to high
+             * `desc` - Descending, from high to low
+        - in: query
+          name: offset
+          schema:
+            type: integer
+          description: The number of items to offset the result by
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: The number of items to return
       responses:
         '200':
           description: An array of Run objects
