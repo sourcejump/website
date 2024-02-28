@@ -303,16 +303,41 @@ components:
         name:
           type: string
           description: Name of the map
+        author:
+          type: string
+          description: Author of the map
         tier:
           type: integer
           description: Difficulty tier of the map
+        type:
+          $ref: '#/components/schemas/MapType'
+          description: The type of the map
+        stages:
+          type: integer
+          description: How many stages the map has
+        bonuses:
+          type: integer
+          description: How many bonuses the map has
+        fileChecksum:
+          type: integer
+          description: The checksum of the map file
+        fileSize:
+          type: integer
+          description: The size of the map (in bytes)
+        downloadUrl:
+          type: string
+          description: Where to download the map from
+        thumbnailUrl:
+          type: string
+          description: Where the thumbnail image of the map is hosted
         createdAt:
           type: string
           format: date
           description: When the map was created
-        author:
+        updatedAt:
           type: string
-          description: Author of the map
+          format: date
+          description: When the map was last updated
     MapArray:
       type: array
       items:
@@ -350,35 +375,38 @@ components:
         id:
           type: integer
           description: Numerical run ID
-        time:
-          type: integer
-          description: Length of the run in ticks
-        date:
+        datetime:
           type: string
           format: date-time
           description: When the run was hit
-        sync:
-          type: number
-          format: double
-          description: The runs sync
-        strafes:
+        server:
+          $ref: '#/components/schemas/Server'
+          description: The server the run was hit on
+        player:
+          $ref: '#/components/schemas/Player'
+          description: The player that hit the run
+        map:
+          $ref: '#/components/schemas/Map'
+          description: The map the run was hit on
+        track:
           type: integer
-          description: The amount of strafes in the run
+          description: The track number the run was hit on
+        style:
+          type: integer
+          description: The style number the run was hit on
+        ticks:
+          type: integer
+          description: Length of the run in ticks
         jumps:
           type: integer
           description: The amount of jumps in the run
-        playerName:
-          type: string
-          description: The name of the player that hit the run
-        mapName:
-          type: string
-          description: The name of the map the run was on
-        style:
-          type: string
-          description: The style the run was played on
-        server:
-          type: string
-          description: The name of the server the run was hit on
+        strafes:
+          type: integer
+          description: The amount of strafes in the run
+        sync:
+          type: number
+          format: float
+          description: The runs sync
         points:
           type: integer
           description: The amount of points awarded for the run
@@ -453,9 +481,17 @@ components:
       enum:
         - id
         - name
-        - tier
-        - createdAt
         - author
+        - tier
+        - type
+        - stages
+        - bonuses
+        - fileChecksum
+        - fileSize
+        - downloadUrl
+        - thumbnailUrl
+        - createdAt
+        - updatedAt
     PlayerFields:
       type: string
       enum:
@@ -469,15 +505,16 @@ components:
       type: string
       enum:
         - id
-        - time
-        - date
-        - sync
-        - strafes
-        - jumps
-        - playerName
-        - mapName
-        - style
+        - datetime
         - server
+        - player
+        - map
+        - track
+        - style
+        - ticks
+        - jumps
+        - strafes
+        - sync
         - points
     ServerFields:
       type: string
@@ -488,6 +525,11 @@ components:
         - discordLink
         - ownerSteamid
         - countryName
+    MapType:
+      type: string
+      enum:
+        - linear
+        - staged
     ZoneType:
       type: string
       enum:
