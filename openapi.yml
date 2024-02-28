@@ -53,8 +53,31 @@ paths:
           $ref: '#/components/responses/NotFound'
         default:
           description: Unexpected error
-  # /maps/{map}/zones:
-  # to be fleshed out upon zone discussion
+  /maps/{map}/zones:
+    get:
+      summary: Return zone data for the specified map
+      tags:
+        - maps
+      parameters:
+        - in: path
+          name: map
+          schema:
+            type: string
+          required: true
+          description: Name of the map
+      responses:
+        '200':
+          description: An array of Zone objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZoneArray'
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected error
   /players:
     get:
       summary: Return a list of all players
@@ -393,6 +416,37 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Server'
+    Zone:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Numerical zone ID
+        track:
+          type: integer
+          description: Numerical map track
+        type:
+          $ref: '#/components/schemas/ZoneType'
+          description: The zone's type
+        index:
+          type: integer
+          description: The zone's index
+        pointA:
+          type: array
+          items:
+            type: number
+            format: double
+          description: The zone's first point
+        pointB:
+          type: array
+          items:
+            type: number
+            format: double
+          description: The zone's second point
+    ZoneArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Zone'
     # Reusable enums of model fields
     MapFields:
       type: string
@@ -434,6 +488,14 @@ components:
         - discordLink
         - ownerSteamid
         - countryName
+    ZoneType:
+      type: string
+      enum:
+        - start
+        - end
+        - stop
+        - stage
+        - freestyle
   parameters:
     OffsetParam:
       in: query
