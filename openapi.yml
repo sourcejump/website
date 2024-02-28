@@ -16,9 +16,9 @@ paths:
           schema:
             $ref: '#/components/schemas/MapFields'
           description: Column to sort on
-        - $ref: '#/components/parameters/orderParam'
-        - $ref: '#/components/parameters/offsetParam'
-        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/OrderParam'
+        - $ref: '#/components/parameters/OffsetParam'
+        - $ref: '#/components/parameters/LimitParam'
       responses:
         '200':
           description: An array of Map objects
@@ -66,9 +66,9 @@ paths:
           schema:
             $ref: '#/components/schemas/PlayerFields'
           description: Column to sort on
-        - $ref: '#/components/parameters/orderParam'
-        - $ref: '#/components/parameters/offsetParam'
-        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/OrderParam'
+        - $ref: '#/components/parameters/OffsetParam'
+        - $ref: '#/components/parameters/LimitParam'
       responses:
         '200':
           description: An array of Player objects
@@ -139,9 +139,9 @@ paths:
           schema:
             $ref: '#/components/schemas/RunFields'
           description: Column to sort on
-        - $ref: '#/components/parameters/orderParam'
-        - $ref: '#/components/parameters/offsetParam'
-        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/OrderParam'
+        - $ref: '#/components/parameters/OffsetParam'
+        - $ref: '#/components/parameters/LimitParam'
       responses:
         '200':
           description: An array of Run objects
@@ -212,9 +212,9 @@ paths:
           schema:
             $ref: '#/components/schemas/ServerFields'
           description: Column to sort on
-        - $ref: '#/components/parameters/orderParam'
-        - $ref: '#/components/parameters/offsetParam'
-        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/OrderParam'
+        - $ref: '#/components/parameters/OffsetParam'
+        - $ref: '#/components/parameters/LimitParam'
       responses:
         '200':
           description: An array of Server objects
@@ -283,7 +283,7 @@ components:
         tier:
           type: integer
           description: Difficulty tier of the map
-        created_at:
+        createdAt:
           type: string
           format: date
           description: When the map was created
@@ -344,10 +344,10 @@ components:
         jumps:
           type: integer
           description: The amount of jumps in the run
-        player_name:
+        playerName:
           type: string
           description: The name of the player that hit the run
-        map_name:
+        mapName:
           type: string
           description: The name of the map the run was on
         style:
@@ -376,17 +376,17 @@ components:
           type: string
           format: ipv4
           description: Server IP address
-        discord_link:
+        discordLink:
           type:
             - 'null'
             - string
           description: A link to the server's discord (if it exists)
-        owner_steamid:
+        ownerSteamid:
           type:
             - 'null'
             - integer
           description: The SteamID64 of the server's owner (if it exists)
-        country_name:
+        countryName:
           type: string
           description: The country the server is hosted in
     ServerArray:
@@ -400,7 +400,7 @@ components:
         - id
         - name
         - tier
-        - created_at
+        - createdAt
         - author
     PlayerFields:
       type: string
@@ -420,8 +420,8 @@ components:
         - sync
         - strafes
         - jumps
-        - player_name
-        - map_name
+        - playerName
+        - mapName
         - style
         - server
         - points
@@ -431,17 +431,17 @@ components:
         - id
         - name
         - address
-        - discord_link
-        - owner_steamid
-        - country_name
+        - discordLink
+        - ownerSteamid
+        - countryName
   parameters:
-    offsetParam:
+    OffsetParam:
       in: query
       name: offset
       schema:
         type: integer
       description: The number of items to offset the result by
-    orderParam:
+    OrderParam:
       in: query
       name: order
       schema:
@@ -453,7 +453,7 @@ components:
         Sort order (by Run ID):
           * `asc` - Ascending, from low to high
           * `desc` - Descending, from high to low
-    limitParam:
+    LimitParam:
       in: query
       name: limit
       schema:
