@@ -1,0 +1,605 @@
+openapi: '3.1.0'
+info:
+  title: SourceJump API
+  version: 1.0.0
+servers:
+  - url: https://sourcejump.net/api/v1
+paths:
+  /maps:
+    get:
+      summary: Return a list of all maps
+      tags:
+        - maps
+      parameters:
+        - in: query
+          name: sort
+          schema:
+            $ref: '#/components/schemas/MapFields'
+          description: Column to sort on
+        - $ref: '#/components/parameters/OrderParam'
+        - $ref: '#/components/parameters/OffsetParam'
+        - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: An array of Map objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MapArray'
+        default:
+          description: Unexpected error
+  /maps/{map}:
+    get:
+      summary: Return detailed information about a specified map
+      tags:
+        - maps
+      parameters:
+        - in: path
+          name: map
+          schema:
+            type: string
+          required: true
+          description: Name of the map
+      responses:
+        '200':
+          description: A Map opject
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Map'
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected error
+  /maps/{map}/zones:
+    get:
+      summary: Return zone data for the specified map
+      tags:
+        - maps
+      parameters:
+        - in: path
+          name: map
+          schema:
+            type: string
+          required: true
+          description: Name of the map
+      responses:
+        '200':
+          description: An array of Zone objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZoneArray'
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected error
+  /players:
+    get:
+      summary: Return a list of all players
+      tags:
+        - players
+      parameters:
+        - in: query
+          name: sort
+          schema:
+            $ref: '#/components/schemas/PlayerFields'
+          description: Column to sort on
+        - $ref: '#/components/parameters/OrderParam'
+        - $ref: '#/components/parameters/OffsetParam'
+        - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: An array of Player objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerArray'
+  /players/{player}:
+    get:
+      summary: Return detailed information about a player
+      tags:
+        - players
+      parameters:
+        - in: path
+          name: player
+          schema:
+            type: integer
+          required: true
+          description: SteamID64 of the player to fetch
+      responses:
+        '200':
+          description: A Player object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected error
+  /runs:
+    get:
+      summary: Return a list of runs matching the given query
+      tags:
+        - runs
+      parameters:
+        - in: query
+          name: server
+          schema:
+            type: integer
+          description: ID of the server to filter
+        - in: query
+          name: player
+          schema:
+            type: integer
+          description: SteamID64 of the player to filter
+        - in: query
+          name: map
+          schema:
+            type: string
+          description: Name of the map to filter
+        - in: query
+          name: track
+          schema:
+            type: integer
+            default: 0
+          description: Track of the run to filter (Default - 0/Main)
+        - in: query
+          name: style
+          schema:
+            type: integer
+            default: 0
+          description: Style of the run to filter (Default - 0/Auto)
+        - in: query
+          name: sort
+          schema:
+            $ref: '#/components/schemas/RunFields'
+          description: Column to sort on
+        - $ref: '#/components/parameters/OrderParam'
+        - $ref: '#/components/parameters/OffsetParam'
+        - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: An array of Run objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunArray'
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected error
+    post:
+      summary: Creates a run entry
+      tags:
+        - runs
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Run'
+      responses:
+        '201':
+          description: created
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        default:
+          description: Unexpected error
+  /runs/{runId}:
+    get:
+      summary: Return detailed information about a specific run
+      tags:
+        - runs
+      parameters:
+        - in: path
+          name: runId
+          schema:
+            type: integer
+          required: true
+          description: Run ID of the run to fetch
+      responses:
+        '200':
+          description: A Run object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Run'
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected error
+  /runs/{runId}/replay:
+    get:
+      summary: Return a replay for a specific run
+      tags:
+        - runs
+      parameters:
+        - in: path
+          name: runId
+          schema:
+            type: integer
+          required: true
+          description: Run ID of the run to fetch
+      responses:
+        '200':
+          description: A binary file containing the runs replay
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected error
+  /servers:
+    get:
+      summary: Return an array of all connected servers
+      tags:
+        - servers
+      parameters:
+        - in: query
+          name: sort
+          schema:
+            $ref: '#/components/schemas/ServerFields'
+          description: Column to sort on
+        - $ref: '#/components/parameters/OrderParam'
+        - $ref: '#/components/parameters/OffsetParam'
+        - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: An array of Server objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerArray'
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected error
+
+# We can store common response objects and types here
+components:
+  # Security schemes for protected endpoints (run submission)
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+  # Common response objects
+  responses:
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Invalid:
+      description: The request was invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+  schemas:
+    # Generic error response body
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+        - code
+        - string
+    # General response objects
+    Map:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Numerical map ID
+        name:
+          type: string
+          description: Name of the map
+        author:
+          type: string
+          description: Author of the map
+        tier:
+          type: integer
+          description: Difficulty tier of the map
+        type:
+          $ref: '#/components/schemas/MapType'
+          description: The type of the map
+        stages:
+          type: integer
+          description: How many stages the map has
+        bonuses:
+          type: integer
+          description: How many bonuses the map has
+        fileChecksum:
+          type: integer
+          description: The checksum of the map file
+        fileSize:
+          type: integer
+          description: The size of the map (in bytes)
+        downloadUrl:
+          type: string
+          description: Where to download the map from
+        thumbnailUrl:
+          type: string
+          description: Where the thumbnail image of the map is hosted
+        createdAt:
+          type: string
+          format: date
+          description: When the map was created
+        updatedAt:
+          type: string
+          format: date
+          description: When the map was last updated
+    MapArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Map'
+    Player:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Numerical player ID
+        name:
+          type: string
+          description: Player name
+        points:
+          type: integer
+          description: Amount of points the player has
+        banned:
+          type: boolean
+          description: Is the player currently banned?
+        country:
+          type:
+            - 'null'
+            - string
+          description: The country specified by the player
+        steamid:
+          type: integer
+          description: SteamID64 of the player
+    PlayerArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Player'
+    Run:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Numerical run ID
+        datetime:
+          type: string
+          format: date-time
+          description: When the run was hit
+        server:
+          $ref: '#/components/schemas/Server'
+          description: The server the run was hit on
+        player:
+          $ref: '#/components/schemas/Player'
+          description: The player that hit the run
+        map:
+          $ref: '#/components/schemas/Map'
+          description: The map the run was hit on
+        track:
+          type: integer
+          description: The track number the run was hit on
+        style:
+          type: integer
+          description: The style number the run was hit on
+        ticks:
+          type: integer
+          description: Length of the run in ticks
+        jumps:
+          type: integer
+          description: The amount of jumps in the run
+        strafes:
+          type: integer
+          description: The amount of strafes in the run
+        sync:
+          type: number
+          format: float
+          description: The runs sync
+        points:
+          type: integer
+          description: The amount of points awarded for the run
+    RunArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Run'
+    Server:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Numerical server ID
+        name:
+          type: string
+          description: Server name
+        address:
+          type: string
+          format: ipv4
+          description: Server IP address
+        discordLink:
+          type:
+            - 'null'
+            - string
+          description: A link to the server's discord (if it exists)
+        ownerSteamid:
+          type:
+            - 'null'
+            - integer
+          description: The SteamID64 of the server's owner (if it exists)
+        countryName:
+          type: string
+          description: The country the server is hosted in
+    ServerArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Server'
+    Zone:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Numerical zone ID
+        track:
+          type: integer
+          description: Numerical map track
+        type:
+          $ref: '#/components/schemas/ZoneType'
+          description: The zone's type
+        index:
+          type: integer
+          description: The zone's index
+        pointA:
+          type: array
+          items:
+            type: number
+            format: double
+          description: The zone's first point
+        pointB:
+          type: array
+          items:
+            type: number
+            format: double
+          description: The zone's second point
+    ZoneArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Zone'
+    # Reusable enums of model fields
+    MapFields:
+      type: string
+      enum:
+        - id
+        - name
+        - author
+        - tier
+        - type
+        - stages
+        - bonuses
+        - fileChecksum
+        - fileSize
+        - downloadUrl
+        - thumbnailUrl
+        - createdAt
+        - updatedAt
+    PlayerFields:
+      type: string
+      enum:
+        - id
+        - name
+        - points
+        - banned
+        - country
+        - steamid
+    RunFields:
+      type: string
+      enum:
+        - id
+        - datetime
+        - server
+        - player
+        - map
+        - track
+        - style
+        - ticks
+        - jumps
+        - strafes
+        - sync
+        - points
+    ServerFields:
+      type: string
+      enum:
+        - id
+        - name
+        - address
+        - discordLink
+        - ownerSteamid
+        - countryName
+    MapType:
+      type: string
+      enum:
+        - linear
+        - staged
+    ZoneType:
+      type: string
+      enum:
+        - start
+        - end
+        - stop
+        - stage
+        - freestyle
+  parameters:
+    OffsetParam:
+      in: query
+      name: offset
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+      description: The number of items to offset the result by
+    OrderParam:
+      in: query
+      name: order
+      schema:
+        type: string
+        enum:
+          - asc
+          - desc
+      description: >
+        Sort order (by Run ID):
+          * `asc` - Ascending, from low to high
+          * `desc` - Descending, from high to low
+    LimitParam:
+      in: query
+      name: limit
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 50
+      description: The number of items to return
+tags:
+  - name: maps
+    description: All routes relating to maps
+  - name: players
+    description: All routes relating to players
+  - name: runs
+    description: All routes relating to runs
+  - name: servers
+    description: All routes relating to servers
