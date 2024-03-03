@@ -544,6 +544,8 @@ components:
       name: offset
       schema:
         type: integer
+        minimum: 0
+        default: 0
       description: The number of items to offset the result by
     OrderParam:
       in: query
@@ -562,6 +564,9 @@ components:
       name: limit
       schema:
         type: integer
+        minimum: 1
+        maximum: 100
+        default: 50
       description: The number of items to return
 tags:
   - name: maps
