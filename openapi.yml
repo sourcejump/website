@@ -224,6 +224,32 @@ paths:
           $ref: '#/components/responses/NotFound'
         default:
           description: Unexpected error
+  /runs/{runId}/replay:
+    get:
+      summary: Return a replay for a specific run
+      tags:
+        - runs
+      parameters:
+        - in: path
+          name: runId
+          schema:
+            type: integer
+          required: true
+          description: Run ID of the run to fetch
+      responses:
+        '200':
+          description: A binary file containing the runs replay
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected error
   /servers:
     get:
       summary: Return an array of all connected servers
