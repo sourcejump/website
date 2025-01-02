@@ -42,7 +42,7 @@ paths:
           description: Name of the map
       responses:
         '200':
-          description: A Map opject
+          description: A Map object
           content:
             application/json:
               schema:
@@ -192,7 +192,11 @@ paths:
               $ref: '#/components/schemas/Run'
       responses:
         '201':
-          description: created
+          description: Run successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Run'
         '400':
           $ref: '#/components/responses/Invalid'
         '401':
@@ -318,7 +322,7 @@ components:
           type: string
       required:
         - code
-        - string
+        - message
     # General response objects
     Map:
       type: object
